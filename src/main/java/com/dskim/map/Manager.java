@@ -1,4 +1,4 @@
-package com.dskim.map.model;
+package com.dskim.map;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

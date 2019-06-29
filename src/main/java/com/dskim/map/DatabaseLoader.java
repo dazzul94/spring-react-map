@@ -1,4 +1,4 @@
-package com.dskim.map.common;
+package com.dskim.map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -6,11 +6,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-
-import com.dskim.map.model.Employee;
-import com.dskim.map.model.Manager;
-import com.dskim.map.repository.EmployeeRepository;
-import com.dskim.map.repository.ManagerRepository;
 
 @Component
 public class DatabaseLoader implements CommandLineRunner {

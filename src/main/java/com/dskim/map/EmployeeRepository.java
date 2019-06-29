@@ -1,10 +1,8 @@
-package com.dskim.map.repository;
+package com.dskim.map;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
-
-import com.dskim.map.model.Employee;
 
 @PreAuthorize("hasRole('ROLE_MANAGER')")
 public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long> {

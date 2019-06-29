@@ -1,4 +1,4 @@
-package com.dskim.map.util;
+package com.dskim.map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
@@ -6,10 +6,6 @@ import org.springframework.data.rest.core.annotation.HandleBeforeSave;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-
-import com.dskim.map.model.Employee;
-import com.dskim.map.model.Manager;
-import com.dskim.map.repository.ManagerRepository;
 
 @Component
 @RepositoryEventHandler(Employee.class)

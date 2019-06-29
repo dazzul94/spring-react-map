@@ -1,4 +1,4 @@
-package com.dskim.map.config;
+package com.dskim.map;
 
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
-package com.dskim.map.util;
+package com.dskim.map;
 
-import static com.dskim.map.config.WebSocketConfiguration.MESSAGE_PREFIX;
+import static com.dskim.map.WebSocketConfiguration.MESSAGE_PREFIX;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
@@ -10,8 +10,6 @@ import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
-
-import com.dskim.map.model.Employee;
 
 @Component
 @RepositoryEventHandler(Employee.class)

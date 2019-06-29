@@ -11,6 +11,7 @@ const stompClient = require('./websocket-listener');
 
 const root = '/api';
 
+import Search from './search.js';
 class App extends React.Component {
 
 	constructor(props) {
@@ -235,6 +236,7 @@ class App extends React.Component {
 							  onDelete={this.onDelete}
 							  updatePageSize={this.updatePageSize}
 							  loggedInManager={this.state.loggedInManager}/>
+				<Search />
 			</div>
 		)
 	}
