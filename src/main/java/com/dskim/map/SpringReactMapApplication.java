@@ -4,10 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringbootReactMapApplication {
+public class SpringReactMapApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootReactMapApplication.class, args);
+		SpringApplication.run(SpringReactMapApplication.class, args);
 	}
-
 }

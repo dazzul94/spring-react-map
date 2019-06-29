@@ -1,4 +1,3 @@
-
 # Created by https://www.gitignore.io/api/git,java,node,maven,intellij
 
 ### Git ###
@@ -233,3 +232,18 @@ typings/
 /dist/
 /nbdist/
 /.nb-gradle/
+
+
+
+*.iml
+.idea
+target
+bower_components
+node_modules
+node
+*.log
+asciidoctor.css
+README.html
+built
+dump.rdb
+package-lock.json
