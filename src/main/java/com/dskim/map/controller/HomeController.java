@@ -1,4 +1,4 @@
-package com.dskim.map;
+package com.dskim.map.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
