@@ -12,34 +12,98 @@ const stompClient = require('./websocket-listener');
 const root = '/api';
 
 import Search from './search.js';
+import SearchHistories from './searchHistories.js';
 
 class App extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {employees: [], attributes: [], page: 1, pageSize: 2, links: {}
-		   , loggedInManager: this.props.loggedInManager};
+		this.state = {
+			searchHistories: [], 
+			attributes: [], 
+			page: 1, 
+			pageSize: 45, 
+			links: {}, 
+			loggedInManager: this.props.loggedInManager
+		};
+
+		this.onCreate = this.onCreate.bind(this);
+		this.refreshAndGoToLastPage = this.refreshAndGoToLastPage.bind(this);
+		this.onNavigate = this.onNavigate.bind(this);
 	}
 
 	// tag::register-handlers[]
 	componentDidMount() {
-		// employ 조회
-		// this.loadFromServer(this.state.pageSize);
+		// searchHistries 조회
+		this.loadFromServer(this.state.pageSize);
 		stompClient.register([
-			{route: '/topic/newEmployee', callback: this.refreshAndGoToLastPage},
-			{route: '/topic/updateEmployee', callback: this.refreshCurrentPage},
-			{route: '/topic/deleteEmployee', callback: this.refreshCurrentPage}
+			{route: '/search/newSearchHistory', callback: this.refreshAndGoToLastPage}
 		]);
 	}
 	// end::register-handlers[]
 
+	onCreate(newSearchHistory) {
+		console.log("onCreate func")
+		follow(client, root, ['searchHistories']).done(response => {
+			client({
+				method: 'POST',
+				path: response.entity._links.self.href,
+				entity: newSearchHistory,
+				headers: {'Content-Type': 'application/json'}
+			})
+		})
+	}
+
+	// tag::websocket-handlers[]
+	refreshAndGoToLastPage(message) {
+		console.log("refreshAndGoToLastPage");
+		follow(client, root, [{
+			rel: 'searchHistories',
+			params: {size: this.state.pageSize}
+		}]).done(response => {
+			console.log('최근검색어 추가 성공');
+			if (response.entity._links.last !== undefined) {
+				this.onNavigate(response.entity._links.last.href);
+			} else {
+				this.onNavigate(response.entity._links.self.href);
+			}
+		})
+	}
+	
+	onNavigate(navUri) {
+		client({
+			method: 'GET',
+			path: navUri
+		}).then(searchHistoryCollection => {
+			this.links = searchHistoryCollection.entity._links;
+			this.page = searchHistoryCollection.entity.page;
+
+			return searchHistoryCollection.entity._embedded.searchHistories.map(searchHistory =>
+					client({
+						method: 'GET',
+						path: searchHistory._links.self.href
+					})
+			);
+		}).then(searchHistoryPromises => {
+			return when.all(searchHistoryPromises);
+		}).done(searchHistories => {
+			this.setState({
+				page: this.page,
+				searchHistories: searchHistories,
+				attributes: Object.keys(this.schema.properties),
+				pageSize: this.state.pageSize,
+				links: this.links
+			});
+		});
+	}	
+
 	loadFromServer(pageSize) {
 		follow(client, root, [
-				{rel: 'employees', params: {size: pageSize}}]
-		).then(employeeCollection => {
+				{rel: 'searchHistories', params: {size: pageSize}}]
+		).then(searchHistoryCollection => {
 			return client({
 				method: 'GET',
-				path: employeeCollection.entity._links.profile.href,
+				path: searchHistoryCollection.entity._links.profile.href,
 				headers: {'Accept': 'application/schema+json'}
 			}).then(schema => {
 				// tag::json-schema-filter[]
@@ -58,24 +122,24 @@ class App extends React.Component {
 				});
 
 				this.schema = schema.entity;
-				this.links = employeeCollection.entity._links;
-				return employeeCollection;
+				this.links = searchHistoryCollection.entity._links;
+				return searchHistoryCollection;
 				// end::json-schema-filter[]
 			});
-		}).then(employeeCollection => {
-			this.page = employeeCollection.entity.page;
-			return employeeCollection.entity._embedded.employees.map(employee =>
+		}).then(searchHistoryCollection => {
+			this.page = searchHistoryCollection.entity.page;
+			return searchHistoryCollection.entity._embedded.searchHistories.map(searchHistory =>
 					client({
 						method: 'GET',
-						path: employee._links.self.href
+						path: searchHistory._links.self.href
 					})
 			);
-		}).then(employeePromises => {
-			return when.all(employeePromises);
-		}).done(employees => {
+		}).then(searchHistoryPromises => {
+			return when.all(searchHistoryPromises);
+		}).done(searchHistories => {
 			this.setState({
 				page: this.page,
-				employees: employees,
+				searchHistories: searchHistories,
 				attributes: Object.keys(this.schema.properties),
 				pageSize: pageSize,
 				links: this.links
@@ -86,18 +150,17 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-				{/* <CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
-				<EmployeeList page={this.state.page}
-							  employees={this.state.employees}
-							  links={this.state.links}
-							  pageSize={this.state.pageSize}
-							  attributes={this.state.attributes}
-							  onNavigate={this.onNavigate}
-							  onUpdate={this.onUpdate}
-							  onDelete={this.onDelete}
-							  updatePageSize={this.updatePageSize}
-							  loggedInManager={this.state.loggedInManager}/> */}
-				<Search />
+				<SearchHistories page={this.state.page}
+							  	 searchHistories={this.state.searchHistories}
+							  	 links={this.state.links}
+							  	 pageSize={this.state.pageSize}
+							  	 attributes={this.state.attributes}
+							  	 onNavigate={this.onNavigate}
+							  	 onUpdate={this.onUpdate}
+							  	 onDelete={this.onDelete}
+							  	 updatePageSize={this.updatePageSize}
+							  	 loggedInManager={this.state.loggedInManager}/>
+				<Search attributes={this.state.attributes} onCreate={this.onCreate}/>
 			</div>
 		)
 	}

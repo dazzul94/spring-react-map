@@ -10,7 +10,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
 
-	public static final String MESSAGE_PREFIX = "/topic";
+	public static final String MESSAGE_PREFIX = "/search";
 
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {

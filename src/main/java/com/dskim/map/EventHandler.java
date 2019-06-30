@@ -12,7 +12,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-@RepositoryEventHandler(Employee.class)
+@RepositoryEventHandler(SearchHistory.class)
 public class EventHandler {
 
 	private final SimpMessagingTemplate websocket;
@@ -26,31 +26,19 @@ public class EventHandler {
 	}
 
 	@HandleAfterCreate
-	public void newEmployee(Employee employee) {
+	public void newSearchHistory(SearchHistory searchHistory) {
 		this.websocket.convertAndSend(
-				MESSAGE_PREFIX + "/newEmployee", getPath(employee));
-	}
-
-	@HandleAfterDelete
-	public void deleteEmployee(Employee employee) {
-		this.websocket.convertAndSend(
-				MESSAGE_PREFIX + "/deleteEmployee", getPath(employee));
-	}
-
-	@HandleAfterSave
-	public void updateEmployee(Employee employee) {
-		this.websocket.convertAndSend(
-				MESSAGE_PREFIX + "/updateEmployee", getPath(employee));
+				MESSAGE_PREFIX + "/newSearchHistory", getPath(searchHistory));
 	}
 
 	/**
 	 * Take an {@link Employee} and get the URI using Spring Data REST's {@link EntityLinks}.
 	 *
-	 * @param employee
+	 * @param searchHistory
 	 */
-	private String getPath(Employee employee) {
-		return this.entityLinks.linkForSingleResource(employee.getClass(),
-				employee.getId()).toUri().getPath();
+	private String getPath(SearchHistory searchHistory) {
+		return this.entityLinks.linkForSingleResource(searchHistory.getClass(),
+				searchHistory.getId()).toUri().getPath();
 	}
 
 }

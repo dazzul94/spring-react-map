@@ -8,10 +8,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 @Component
-@RepositoryEventHandler(Employee.class)
+@RepositoryEventHandler(SearchHistory.class)
 public class SpringDataRestEventHandler {
 
-//	private final ManagerRepository managerRepository;
 	private final UserAccountRepository userAccountRepository;
 
 	@Autowired
@@ -21,7 +20,7 @@ public class SpringDataRestEventHandler {
 
 	@HandleBeforeCreate
 	@HandleBeforeSave
-	public void applyUserInformationUsingSecurityContext(Employee employee) {
+	public void applyUserInformationUsingSecurityContext(SearchHistory searchHistory) {
 
 		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 		UserAccount userAccount= this.userAccountRepository.findByName(name);

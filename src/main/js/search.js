@@ -1,4 +1,6 @@
 const React = require('react');
+const ReactDOM = require('react-dom');
+
 import jQuery from "jquery";
 window.$ = window.jQuery = jQuery;
 
@@ -22,13 +24,24 @@ class Search extends React.Component {
     handleSearch(e) {
         e.preventDefault();
         
-        var keyword = $('#search').val();
+        var keyword = $('#keyWord').val();
         if (!keyword.replace(/^\s+|\s+$/g, '')) {
             alert('키워드를 입력해주세요!');
             return false;
         }
         // 키워드로 장소를 검색합니다
         this.state.placeObject.keywordSearch(keyword, this.placesSearchCB); 
+        
+        // 최근 검색어에 추가
+        const newSearchHistory = {};
+        this.props.attributes.forEach(attribute => {
+            newSearchHistory[attribute] = ReactDOM.findDOMNode(this.refs[attribute]).value.trim();
+        });
+        this.props.onCreate(newSearchHistory);
+        this.props.attributes.forEach(attribute => {
+            ReactDOM.findDOMNode(this.refs[attribute]).value = ''; // clear out the dialog's inputs
+        });
+
         window.location = "#";
         }
         
@@ -81,7 +94,7 @@ class Search extends React.Component {
         render() {
             return (
                 <div>
-                    <input id="search" type="text" placeholder="검색창" className="field"/>
+                    <input id="keyWord" type="text" placeholder="키워드" ref="keyWord" className="field"/>
                     <button onClick={this.handleSearch}>Search</button>
                     <div id="pagination"></div>
                     <PlaceGrid 

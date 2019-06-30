@@ -11,11 +11,14 @@ import org.springframework.stereotype.Component;
 public class DatabaseLoader implements CommandLineRunner {
 
 	private final UserAccountRepository userAccounts;
+	private final SearchHistoryRepository searchHistories;
 
 	@Autowired
-	public DatabaseLoader(UserAccountRepository userAccountRepository) {
+	public DatabaseLoader(UserAccountRepository userAccountRepository
+			, SearchHistoryRepository searchHistoryRepository) {
 
 		this.userAccounts = userAccountRepository;
+		this.searchHistories = searchHistoryRepository;
 	}
 
 	@Override
@@ -27,6 +30,10 @@ public class DatabaseLoader implements CommandLineRunner {
 		SecurityContextHolder.getContext().setAuthentication(
 				new UsernamePasswordAuthenticationToken("admin", "doesn't matter",
 					AuthorityUtils.createAuthorityList("ADMIN")));
+		
+		// this.searchHistories.save(new SearchHistory("디아뜨", admin));
+		// this.searchHistories.save(new SearchHistory("카카오", admin));
+		// this.searchHistories.save(new SearchHistory("할리스", admin));
 		
 		SecurityContextHolder.clearContext();
 		
