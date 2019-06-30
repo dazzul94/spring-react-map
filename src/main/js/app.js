@@ -18,6 +18,7 @@ class App extends React.Component {
 
 	constructor(props) {
 		super(props);
+
 		this.state = {
 			searchHistories: [], 
 			attributes: [], 
@@ -33,13 +34,16 @@ class App extends React.Component {
 	}
 
 	componentDidMount() {
-		// searchHistries 조회
+
+		// 최근검색어 조회
 		this.loadFromServer(this.state.pageSize);
+
 		stompClient.register([
 			{route: '/search/newSearchHistory', callback: this.refreshAndGoToLastPage}
 		]);
 	}
 
+	// 최근 검색어 등록
 	onCreate(newSearchHistory) {
 		follow(client, root, ['searchHistories']).done(response => {
 			client({
@@ -51,7 +55,7 @@ class App extends React.Component {
 		})
 	}
 
-	// tag::websocket-handlers[]
+	// 목록 재조회
 	refreshAndGoToLastPage(message) {
 		follow(client, root, [{
 			rel: 'searchHistories',
@@ -65,6 +69,7 @@ class App extends React.Component {
 		})
 	}
 	
+	// navigation 이동
 	onNavigate(navUri) {
 		client({
 			method: 'GET',
@@ -92,6 +97,7 @@ class App extends React.Component {
 		});
 	}	
 
+	// 최근검색어 조회
 	loadFromServer(pageSize) {
 		follow(client, root, [
 				{rel: 'searchHistories', params: {size: pageSize}}]
@@ -101,11 +107,7 @@ class App extends React.Component {
 				path: searchHistoryCollection.entity._links.profile.href,
 				headers: {'Accept': 'application/schema+json'}
 			}).then(schema => {
-				// tag::json-schema-filter[]
-				/**
-				 * Filter unneeded JSON Schema properties, like uri references and
-				 * subtypes ($ref).
-				 */
+
 				Object.keys(schema.entity.properties).forEach(function (property) {
 					if (schema.entity.properties[property].hasOwnProperty('format') &&
 						schema.entity.properties[property].format === 'uri') {
@@ -142,8 +144,6 @@ class App extends React.Component {
 	}
 
 	render() {
-		console.log('loggedInUser====', this.state.loggedInUser);
-		console.log('loggedInUser====', this.state.loggedInUser);
 		return (
 			<div>
 				<SearchHistories page={this.state.page}

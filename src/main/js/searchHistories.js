@@ -6,16 +6,21 @@ class SearchHistories extends React.Component {
     }
 
     render() {
-        const { searchHistories } = this.props;
+        const { searchHistories, loggedInUser } = this.props;
         return (
             <div>
                 최근검색어: 
                 {(searchHistories && searchHistories.length > 0)?
-						searchHistories.map( ( searchHistory, idx ) => {
+						searchHistories.filter( searchHistory => {
 							return (
-                                idx == searchHistories.length - 1 ?`${searchHistory.entity.keyWord}`:`${searchHistory.entity.keyWord}, `
+                                searchHistory.entity.userAccount.name === loggedInUser
 							)
-						})
+						}).map( (searchHistory, idx) =>{
+                            return (
+                                searchHistory.entity.keyWord
+                            )
+
+                        })
 						:null
 					}
             </div>
