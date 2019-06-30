@@ -32,7 +32,6 @@ class App extends React.Component {
 		this.onNavigate = this.onNavigate.bind(this);
 	}
 
-	// tag::register-handlers[]
 	componentDidMount() {
 		// searchHistries 조회
 		this.loadFromServer(this.state.pageSize);
@@ -40,10 +39,8 @@ class App extends React.Component {
 			{route: '/search/newSearchHistory', callback: this.refreshAndGoToLastPage}
 		]);
 	}
-	// end::register-handlers[]
 
 	onCreate(newSearchHistory) {
-		console.log("onCreate func")
 		follow(client, root, ['searchHistories']).done(response => {
 			client({
 				method: 'POST',
@@ -56,12 +53,10 @@ class App extends React.Component {
 
 	// tag::websocket-handlers[]
 	refreshAndGoToLastPage(message) {
-		console.log("refreshAndGoToLastPage");
 		follow(client, root, [{
 			rel: 'searchHistories',
 			params: {size: this.state.pageSize}
 		}]).done(response => {
-			console.log('최근검색어 추가 성공');
 			if (response.entity._links.last !== undefined) {
 				this.onNavigate(response.entity._links.last.href);
 			} else {
@@ -124,7 +119,6 @@ class App extends React.Component {
 				this.schema = schema.entity;
 				this.links = searchHistoryCollection.entity._links;
 				return searchHistoryCollection;
-				// end::json-schema-filter[]
 			});
 		}).then(searchHistoryCollection => {
 			this.page = searchHistoryCollection.entity.page;

@@ -4,7 +4,6 @@
   "description": "Map of ReactJS + Spring Data REST",
   "author": "dskim",
   "dependencies": {
-    "jquery": "^3.4.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-modal": "^3.8.1",
