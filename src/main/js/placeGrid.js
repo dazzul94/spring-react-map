@@ -116,36 +116,38 @@ class PlaceList extends React.Component {
 					<h2 ref={subtitle => this.subtitle = subtitle}>{clickedPlace.place_name}</h2>
 					<button onClick={this.closeModal}>close</button>
 					<table>
-						<tr>
-							<td style={{background:"#eee"}}>address_name</td>
-							<td>{clickedPlace.address_name}</td>
-							<td style={{background:"#eee"}}>category_group_code</td>
-							<td>{clickedPlace.category_group_code}</td>
-						</tr>
-						<tr>
-							<td style={{background:"#eee"}}>category_group_name</td>
-							<td>{clickedPlace.category_group_name}</td>
-							<td style={{background:"#eee"}}>category_name</td>
-							<td>{clickedPlace.category_name}</td>
-						</tr>
-						<tr>
-							<td style={{background:"#eee"}}>distance</td>
-							<td>{clickedPlace.distance}</td>
-							<td style={{background:"#eee"}}>phone</td>
-							<td>{clickedPlace.phone}</td>
-						</tr>
-						<tr>
-							<td style={{background:"#eee"}}>place_url</td>
-							<td>{clickedPlace.place_url}</td>
-							<td style={{background:"#eee"}}>road_address_name</td>
-							<td>{clickedPlace.road_address_name}</td>
-						</tr>
-						<tr>
-							<td style={{background:"#eee"}}>x</td>
-							<td>{clickedPlace.x}</td>
-							<td style={{background:"#eee"}}>y</td>
-							<td>{clickedPlace.y}</td>
-						</tr>
+						<tbody>
+							<tr>
+								<td style={{background:"#eee"}}>address_name</td>
+								<td>{clickedPlace.address_name}</td>
+								<td style={{background:"#eee"}}>category_group_code</td>
+								<td>{clickedPlace.category_group_code}</td>
+							</tr>
+							<tr>
+								<td style={{background:"#eee"}}>category_group_name</td>
+								<td>{clickedPlace.category_group_name}</td>
+								<td style={{background:"#eee"}}>category_name</td>
+								<td>{clickedPlace.category_name}</td>
+							</tr>
+							<tr>
+								<td style={{background:"#eee"}}>distance</td>
+								<td>{clickedPlace.distance}</td>
+								<td style={{background:"#eee"}}>phone</td>
+								<td>{clickedPlace.phone}</td>
+							</tr>
+							<tr>
+								<td style={{background:"#eee"}}>place_url</td>
+								<td>{clickedPlace.place_url}</td>
+								<td style={{background:"#eee"}}>road_address_name</td>
+								<td>{clickedPlace.road_address_name}</td>
+							</tr>
+							<tr>
+								<td style={{background:"#eee"}}>x</td>
+								<td>{clickedPlace.x}</td>
+								<td style={{background:"#eee"}}>y</td>
+								<td>{clickedPlace.y}</td>
+							</tr>
+						</tbody>
 					</table>
 					<a href={`https://map.kakao.com/link/map/${clickedPlace.id}`} target="_blank">카카오 지도 바로가기</a>
 					<div id="map" style={{width:"100%",height:'350px'}}></div>

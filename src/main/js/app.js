@@ -228,7 +228,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
+				{/* <CreateDialog attributes={this.state.attributes} onCreate={this.onCreate}/>
 				<EmployeeList page={this.state.page}
 							  employees={this.state.employees}
 							  links={this.state.links}
@@ -238,7 +238,7 @@ class App extends React.Component {
 							  onUpdate={this.onUpdate}
 							  onDelete={this.onDelete}
 							  updatePageSize={this.updatePageSize}
-							  loggedInManager={this.state.loggedInManager}/>
+							  loggedInManager={this.state.loggedInManager}/> */}
 				<Search />
 			</div>
 		)
