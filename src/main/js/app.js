@@ -24,7 +24,7 @@ class App extends React.Component {
 			page: 1, 
 			pageSize: 45, 
 			links: {}, 
-			loggedInManager: this.props.loggedInManager
+			loggedInUser: this.props.loggedInUser
 		};
 
 		this.onCreate = this.onCreate.bind(this);
@@ -142,6 +142,8 @@ class App extends React.Component {
 	}
 
 	render() {
+		console.log('loggedInUser====', this.state.loggedInUser);
+		console.log('loggedInUser====', this.state.loggedInUser);
 		return (
 			<div>
 				<SearchHistories page={this.state.page}
@@ -153,7 +155,7 @@ class App extends React.Component {
 							  	 onUpdate={this.onUpdate}
 							  	 onDelete={this.onDelete}
 							  	 updatePageSize={this.updatePageSize}
-							  	 loggedInManager={this.state.loggedInManager}/>
+							  	 loggedInUser={this.state.loggedInUser}/>
 				<Search attributes={this.state.attributes} onCreate={this.onCreate}/>
 			</div>
 		)
@@ -161,7 +163,7 @@ class App extends React.Component {
 }
 
 ReactDOM.render(
-	<App loggedInManager={document.getElementById('managername').innerHTML } />,
+	<App loggedInUser={document.getElementById('userName').innerHTML } />,
 	document.getElementById('react')
 )
 

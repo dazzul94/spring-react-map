@@ -30,6 +30,6 @@ public class SpringDataRestEventHandler {
 			newUserAccount.setRoles(new String[]{"ADMIN"});
 			userAccount = this.userAccountRepository.save(newUserAccount);
 		}
+		searchHistory.setUserAccount(userAccount);
 	}
 }
-// end::code[]
