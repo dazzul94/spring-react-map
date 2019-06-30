@@ -34,10 +34,11 @@ class Ranking extends React.Component {
             {(keyMap && keyMap.length > 0)?
                 keyMap.sort( (a,b) => {
                     return b.count - a.count;
-                })
-                .map( keyMap =>{
+                }).slice(0,10)
+                .map( (keyMap, idx) =>{
                     return (
                         <div key={keyMap.key}>
+                        	<span style={{color:"red"}}>{idx+1}</span>
                             <span>
                                 {keyMap.key}({keyMap.count})
                             </span>
