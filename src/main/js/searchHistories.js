@@ -15,9 +15,18 @@ class SearchHistories extends React.Component {
 							return (
                                 searchHistory.entity.userAccount.name === loggedInUser
 							)
-						}).map( (searchHistory, idx) =>{
+                        }).
+                        sort( (a,b) => {
+                            return new Date(b.entity.createdDtm) - new Date(a.entity.createdDtm);
+                        })
+                        .map( (searchHistory, idx) =>{
                             return (
-                                searchHistory.entity.keyWord
+                                <div key={idx}>
+                                    <span>
+                                        {searchHistory.entity.keyWord}({searchHistory.entity.createdDtm})
+                                    </span>
+                                    <br/>
+                                </div>
                             )
 
                         })

@@ -14,9 +14,21 @@ class Search extends React.Component {
         this.handleSearch = this.handleSearch.bind(this);
         this.placesSearchCB = this.placesSearchCB.bind(this);
         this.displayPagination = this.displayPagination.bind(this);
+        this.fillZeros = this.fillZeros.bind(this);
     }
 
-    
+    // 날짜변경
+    fillZeros(n, digits) {  
+        var zero = '';  
+        n = n.toString();  
+  
+        if (n.length < digits) {  
+            for (var i = 0; i < digits - n.length; i++)  
+                zero += '0';  
+        }  
+        return zero + n;  
+    }  
+      
     // 검색함수 입니다
     handleSearch(e) {
         e.preventDefault();
@@ -32,7 +44,21 @@ class Search extends React.Component {
         // 최근 검색어에 추가
         const newSearchHistory = {};
         this.props.attributes.forEach(attribute => {
-            newSearchHistory[attribute] = ReactDOM.findDOMNode(this.refs[attribute]).value.trim();
+            if(attribute === 'createdDtm') { 
+                var d = new Date();  
+            
+                var s = this.fillZeros(d.getFullYear(), 4) + '-' +  
+                        this.fillZeros(d.getMonth() + 1, 2) + '-' +  
+                        this.fillZeros(d.getDate(), 2) + ' ' +  
+                            
+                        this.fillZeros(d.getHours(), 2) + ':' +  
+                        this.fillZeros(d.getMinutes(), 2) + ':' +  
+                        this.fillZeros(d.getSeconds(), 2);  
+                newSearchHistory[attribute] = s;
+              
+            } else {
+                newSearchHistory[attribute] = ReactDOM.findDOMNode(this.refs[attribute]).value.trim();
+            }
         });
         this.props.onCreate(newSearchHistory);
         this.props.attributes.forEach(attribute => {
@@ -91,14 +117,15 @@ class Search extends React.Component {
         render() {
             const inputs = this.props.attributes.map(attribute =>
                 <p key={attribute}>
-                    <input type="text" placeholder={attribute} ref={attribute} className="field"/>
+                    <input type={attribute === 'createdDtm' ? "hidden" : "text"} 
+                           placeholder={attribute} 
+                           ref={attribute} 
+                           className="field"/>
                 </p>
             );
             return (
                 <div>
-                    {/*<input id="keyWord" type="text" placeholder="키워드" ref="keyWord" className="field"/>*/}
                     {inputs}
-
                     <button onClick={this.handleSearch}>Search</button>
                     <div id="pagination"></div>
                     <PlaceGrid 

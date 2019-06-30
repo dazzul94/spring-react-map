@@ -17,11 +17,14 @@ public class SearchHistory {
 	private String keyWord;
 
 	private @ManyToOne UserAccount userAccount;
+	
+	private String createdDtm;
 
 	private SearchHistory() {}
 
-	public SearchHistory(String keyWord, UserAccount userAccount) {
+	public SearchHistory(String keyWord, String createdDtm, UserAccount userAccount) {
 		this.keyWord = keyWord;
+		this.createdDtm = createdDtm;
 		this.userAccount = userAccount;
 	}
 }

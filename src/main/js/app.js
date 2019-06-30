@@ -13,6 +13,7 @@ const root = '/api';
 
 import Search from './search.js';
 import SearchHistories from './searchHistories.js';
+import Ranking from './ranking.js';
 
 class App extends React.Component {
 
@@ -146,6 +147,16 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
+				<Ranking page={this.state.page}
+						 searchHistories={this.state.searchHistories}
+						 links={this.state.links}
+						 pageSize={this.state.pageSize}
+						 attributes={this.state.attributes}
+						 onNavigate={this.onNavigate}
+						 onUpdate={this.onUpdate}
+						 onDelete={this.onDelete}
+						 updatePageSize={this.updatePageSize}
+						 loggedInUser={this.state.loggedInUser}/>
 				<SearchHistories page={this.state.page}
 							  	 searchHistories={this.state.searchHistories}
 							  	 links={this.state.links}
