@@ -9,7 +9,7 @@ class SearchHistories extends React.Component {
         const { searchHistories, loggedInUser } = this.props;
         return (
             <div>
-                최근검색어: 
+                <h4>최근검색어: </h4>
                 {(searchHistories && searchHistories.length > 0)?
 						searchHistories.filter( searchHistory => {
 							return (
