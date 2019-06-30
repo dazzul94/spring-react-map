@@ -83,10 +83,10 @@ class Search extends React.Component {
                 <div>
                     <input id="search" type="text" placeholder="검색창" className="field"/>
                     <button onClick={this.handleSearch}>Search</button>
+                    <div id="pagination"></div>
                     <PlaceGrid 
                         data={this.state.placeList}
                         placeObj={this.state.placeObject}/>
-                    <div id="pagination"></div>
                 </div>
 		)
 	}
