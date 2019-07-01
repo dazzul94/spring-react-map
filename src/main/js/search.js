@@ -2,6 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 import PlaceGrid from './placeGrid.js';
+import SearchHistories from './searchHistories.js';
 
 class Search extends React.Component {
     constructor(props) {
@@ -12,6 +13,8 @@ class Search extends React.Component {
             placeObject: new kakao.maps.services.Places()
           };
         this.handleSearch = this.handleSearch.bind(this);
+        this.handleFocusIn = this.handleFocusIn.bind(this);
+        this.handleFocusOut = this.handleFocusOut.bind(this);
         this.placesSearchCB = this.placesSearchCB.bind(this);
         this.displayPagination = this.displayPagination.bind(this);
         this.fillZeros = this.fillZeros.bind(this);
@@ -113,10 +116,24 @@ class Search extends React.Component {
             }
             paginationEl.appendChild(fragment);
         }
+        // input focus in
+        handleFocusIn(e) {
+            e.preventDefault();
+            const recommendBox = document.querySelector("#recommend");
+            recommendBox.classList.remove('invisible');
+        }
+        // input focus out 
+        handleFocusOut(e) {
+            e.preventDefault();
+            const recommendBox = document.querySelector("#recommend");
+            recommendBox.classList.add('invisible');
+        }
 
         render() {
             const inputs = this.props.attributes.map(attribute =>
-                <input key={attribute}
+                <input onFocus={this.handleFocusIn} 
+                       onBlur={this.handleFocusOut}
+                       key={attribute}
                        style={{display:attribute === 'createdDtm' ? "none" : null}}
                        type="text" 
                        placeholder={attribute} 
@@ -124,11 +141,19 @@ class Search extends React.Component {
                        className="input_text"/>
             );
             return (
-                <div>
-                    <span className="green_window">
-                        {inputs}
-                    </span>
-                    <button className="sch_smit" onClick={this.handleSearch}>검색</button>
+                <div className="searchFrame">
+                    <div className="searchCenter">
+                        <span className="green_window">
+                            {inputs}
+                        </span>
+                        <button className="sch_smit" onClick={this.handleSearch}>검색</button>
+                        <SearchHistories page={this.props.page}
+                                searchHistories={this.props.searchHistories}
+                                links={this.props.links}
+                                pageSize={this.props.pageSize}
+                                attributes={this.props.attributes}
+                                loggedInUser={this.props.loggedInUser}/>
+                    </div>
                     
                     <div id="pagination"></div>
                     <PlaceGrid 

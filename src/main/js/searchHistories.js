@@ -3,13 +3,14 @@ const React = require('react');
 class SearchHistories extends React.Component {
     constructor(props) {
         super(props);
+
+        
     }
 
     render() {
         const { searchHistories, loggedInUser } = this.props;
         return (
-            <div>
-                <h4>최근검색어: </h4>
+            <div id="recommend" className="invisible">
                 {(searchHistories && searchHistories.length > 0)?
 						searchHistories.filter( searchHistory => {
 							return (
@@ -21,11 +22,8 @@ class SearchHistories extends React.Component {
                         })
                         .map( (searchHistory, idx) =>{
                             return (
-                                <div key={idx}>
-                                    <span>
-                                        {searchHistory.entity.keyWord}({searchHistory.entity.createdDtm})
-                                    </span>
-                                    <br/>
+                                <div key={idx} className="item">
+                                    {searchHistory.entity.keyWord}({searchHistory.entity.createdDtm}) <span className="text"></span>
                                 </div>
                             )
 

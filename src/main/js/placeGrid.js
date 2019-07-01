@@ -152,7 +152,7 @@ class PlaceList extends React.Component {
 					<a href={`https://map.kakao.com/link/map/${clickedPlace.id}`} target="_blank">카카오 지도 바로가기</a>
 					<div id="map" style={{width:"100%",height:'350px'}}></div>
 				</Modal>
-				<div style={{width:'550px'}}>
+				<div style={{width:'750px'}}>
 					<table>
 					<thead>
 						<tr>

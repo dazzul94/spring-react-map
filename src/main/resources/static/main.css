@@ -2,7 +2,7 @@ body {
 	font:14px/1.8 Arial, Helvetica, sans-serif;
 }
 .frame {
-	width: 800px;
+	width: 1000px;
 	margin: 0 auto;
 	border: 1px solid #aaa;
 }
@@ -99,3 +99,31 @@ table {
     border-bottom: 1px solid #444444;
     padding: 10px;
   }
+
+  #recommend {
+	
+	margin-top: 1px;
+	position: absolute;
+	background: white;
+	padding: 0 10px;
+	width: 345px;
+	border-color: #5457de;
+	border-style: solid;
+}
+
+.item {
+	height: 1.8em;
+	width: 220px;
+	outline: none;
+}
+
+.item:hover {
+	color: #9baec8;
+}
+.text {
+	font-weight: bold;
+}
+
+.invisible {
+	display: none;
+}
