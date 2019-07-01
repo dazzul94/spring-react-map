@@ -146,28 +146,30 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="container">
 				<Ranking page={this.state.page}
-						 searchHistories={this.state.searchHistories}
-						 links={this.state.links}
-						 pageSize={this.state.pageSize}
-						 attributes={this.state.attributes}
-						 onNavigate={this.onNavigate}
-						 onUpdate={this.onUpdate}
-						 onDelete={this.onDelete}
-						 updatePageSize={this.updatePageSize}
-						 loggedInUser={this.state.loggedInUser}/>
-				<SearchHistories page={this.state.page}
-							  	 searchHistories={this.state.searchHistories}
-							  	 links={this.state.links}
-							  	 pageSize={this.state.pageSize}
-							  	 attributes={this.state.attributes}
-							  	 onNavigate={this.onNavigate}
-							  	 onUpdate={this.onUpdate}
-							  	 onDelete={this.onDelete}
-							  	 updatePageSize={this.updatePageSize}
-							  	 loggedInUser={this.state.loggedInUser}/>
-				<Search attributes={this.state.attributes} onCreate={this.onCreate}/>
+							searchHistories={this.state.searchHistories}
+							links={this.state.links}
+							pageSize={this.state.pageSize}
+							attributes={this.state.attributes}
+							onNavigate={this.onNavigate}
+							onUpdate={this.onUpdate}
+							onDelete={this.onDelete}
+							updatePageSize={this.updatePageSize}
+							loggedInUser={this.state.loggedInUser}/>
+				<div className="content">
+					<SearchHistories page={this.state.page}
+									searchHistories={this.state.searchHistories}
+									links={this.state.links}
+									pageSize={this.state.pageSize}
+									attributes={this.state.attributes}
+									onNavigate={this.onNavigate}
+									onUpdate={this.onUpdate}
+									onDelete={this.onDelete}
+									updatePageSize={this.updatePageSize}
+									loggedInUser={this.state.loggedInUser}/>
+					<Search attributes={this.state.attributes} onCreate={this.onCreate}/>
+				</div>
 			</div>
 		)
 	}

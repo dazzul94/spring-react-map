@@ -1,3 +1,5 @@
+import { reduce } from 'when';
+
 const React = require('react');
 const ReactDOM = require('react-dom');
 
@@ -28,28 +30,26 @@ class Ranking extends React.Component {
             keyMap.push( { key : key, count: resultMap[key].length } );
         })
         return (
-            <div>
-            <h4>Ranking: </h4>
-
-            {(keyMap && keyMap.length > 0)?
-                keyMap.sort( (a,b) => {
-                    return b.count - a.count;
-                }).slice(0,10)
-                .map( (keyMap, idx) =>{
-                    return (
-                        <div key={keyMap.key}>
-                        	<span style={{color:"red"}}>{idx+1}</span>
-                            <span>
-                                {keyMap.key}({keyMap.count})
-                            </span>
-                            <br/>
-                        </div>
-                    )
-
-                })
-                :null
-            }
-        </div>
-    )}
+            <div className="nav">
+                <h4 style={{textAlign:"center"}}>Ranking</h4>
+                <ul className="nav-list">
+                    {keyMap && keyMap.length > 0?
+                        keyMap.sort( (a,b) => {
+                            return b.count - a.count;
+                        }).slice(0,10)
+                        .map( (keyMap, idx) =>{
+                            return (
+                                <li key={idx} className="nav-item">
+                                    <a href="" className="nav-link">
+                                        <span style={{color:"red"}}>{idx+1}</span> {keyMap.key}({keyMap.count})
+                                    </a>
+                                </li>
+                                )
+                            })
+                        :null
+                    }
+                </ul>
+            </div>)
+    }
 }
 export default Ranking;

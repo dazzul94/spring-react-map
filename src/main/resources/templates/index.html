@@ -8,18 +8,26 @@
     <link rel="stylesheet" href="/main.css" />
 </head>
 <body>
-    <!-- tag::logout[] -->
-    <div>
-        Hello, <span id="userName" th:text="${#authentication.name}">user</span>.
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Log Out"/>
-        </form>
+    <div class="frame">
+        <div class="header">
+            <div class="logo">장소 검색 서비스</div>
+            Hello, <span id="userName" th:text="${#authentication.name}">user</span>.
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Log Out"/>
+            </form>
+        </div>
+        <!-- //header -->
+        <div class="container">
+            <div id="react"></div>
+        
+            <script src="built/bundle.js"></script>
+        </div>
+        <!-- //container -->
+        <div class="footer">
+            <p class="copyright">&copy;copy</p>
+        </div>
+        <!-- //footer -->
     </div>
-    <!-- end::logout[] -->
-
-    <div id="react"></div>
-
-    <script src="built/bundle.js"></script>
-
+    <!-- //frame -->
 </body>
 </html>

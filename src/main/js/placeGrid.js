@@ -105,7 +105,7 @@ class PlaceList extends React.Component {
 		const { data } = this.props;
 		const { clickedPlace } = this.state;
         return(
-			<div>
+			<div style={{paddingTop:'20px'}}>
 				<Modal
 					isOpen={this.state.modalIsOpen}
 					onAfterOpen={this.afterOpenModal}
@@ -152,35 +152,35 @@ class PlaceList extends React.Component {
 					<a href={`https://map.kakao.com/link/map/${clickedPlace.id}`} target="_blank">카카오 지도 바로가기</a>
 					<div id="map" style={{width:"100%",height:'350px'}}></div>
 				</Modal>
-
-				<table>
-				<caption>장소 목록</caption>
-				<thead>
-					<tr>
-						<th>주소</th>
-						<th>이름</th>
-						<th>전화번호</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					{(data && data.length > 0)?
-						data.map( ( data, idx ) => {
-							return (
-								<tr key={idx}>
-									<th>{data.address_name}</th>
-									<td>{data.place_name}</td>
-									<td>{data.phone}</td>
-									<td><button onClick={(e) => this.handleBtnClick(data)}>More</button></td>
-								</tr>
-							)
-						})
-						:<tr>
-							<td colSpan="4">조회된 정보가 없습니다.</td>
+				<div style={{width:'550px'}}>
+					<table>
+					<thead>
+						<tr>
+							<th>주소</th>
+							<th>이름</th>
+							<th>전화번호</th>
+							<th></th>
 						</tr>
-					}
-				</tbody>
-				</table>
+					</thead>
+					<tbody>
+						{(data && data.length > 0)?
+							data.map( ( data, idx ) => {
+								return (
+									<tr key={idx}>
+										<th>{data.address_name}</th>
+										<td>{data.place_name}</td>
+										<td>{data.phone}</td>
+										<td><button onClick={(e) => this.handleBtnClick(data)}>More</button></td>
+									</tr>
+								)
+							})
+							:<tr>
+								<td colSpan="4">조회된 정보가 없습니다.</td>
+							</tr>
+						}
+					</tbody>
+					</table>
+				</div>
 			</div>
 			
 		)

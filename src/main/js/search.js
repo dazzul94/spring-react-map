@@ -116,17 +116,20 @@ class Search extends React.Component {
 
         render() {
             const inputs = this.props.attributes.map(attribute =>
-                <p key={attribute}>
-                    <input type={attribute === 'createdDtm' ? "hidden" : "text"} 
-                           placeholder={attribute} 
-                           ref={attribute} 
-                           className="field"/>
-                </p>
+                <input key={attribute}
+                       style={{display:attribute === 'createdDtm' ? "none" : null}}
+                       type="text" 
+                       placeholder={attribute} 
+                       ref={attribute} 
+                       className="input_text"/>
             );
             return (
                 <div>
-                    {inputs}
-                    <button onClick={this.handleSearch}>Search</button>
+                    <span className="green_window">
+                        {inputs}
+                    </span>
+                    <button className="sch_smit" onClick={this.handleSearch}>검색</button>
+                    
                     <div id="pagination"></div>
                     <PlaceGrid 
                         data={this.state.placeList}
