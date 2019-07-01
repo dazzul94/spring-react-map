@@ -28,7 +28,7 @@ class SearchHistories extends React.Component {
                             )
 
                         })
-						:null
+						:<div className="item"><span className="text">최근 검색 이력이 없습니다.</span></div>
 					}
             </div>
         )
