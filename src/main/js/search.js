@@ -67,99 +67,96 @@ class Search extends React.Component {
         this.props.attributes.forEach(attribute => {
             ReactDOM.findDOMNode(this.refs[attribute]).value = '';
         });
-
-        window.location = "#";
-        }
+    }
         
-        // 키워드 검색 완료 시 호출되는 콜백함수 입니다
-        placesSearchCB (data, status, pagination) {
-            if (status === 'OK') {
-                this.setState({
-                    placeList: data
-                });
-                this.displayPagination(pagination);
+    // 키워드 검색 완료 시 호출되는 콜백함수 입니다
+    placesSearchCB (data, status, pagination) {
+        if (status === 'OK') {
+            this.setState({
+                placeList: data
+            });
+            this.displayPagination(pagination);
+        } else {
+            // 오류 처리
+            this.setState({
+                placeList: []
+            })
+        }
+    }
+    
+    // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
+    displayPagination(pagination) {
+        var paginationEl = document.getElementById('pagination'),
+            fragment = document.createDocumentFragment(),
+            i; 
+
+        // 기존에 추가된 페이지번호를 삭제합니다
+        while (paginationEl.hasChildNodes()) {
+            paginationEl.removeChild (paginationEl.lastChild);
+        }
+
+        for (i=1; i<=pagination.last; i++) {
+            var el = document.createElement('a');
+            el.innerHTML = i;
+
+            if (i===pagination.current) {
+                el.className = 'active';
             } else {
-                // 오류 처리
-                this.setState({
-                    placeList: []
-                })
-            }
-        }
-        
-        // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
-        displayPagination(pagination) {
-            var paginationEl = document.getElementById('pagination'),
-                fragment = document.createDocumentFragment(),
-                i; 
-
-            // 기존에 추가된 페이지번호를 삭제합니다
-            while (paginationEl.hasChildNodes()) {
-                paginationEl.removeChild (paginationEl.lastChild);
+                el.onclick = (function(i) {
+                    return function() {
+                        pagination.gotoPage(i);
+                    }
+                })(i);
             }
 
-            for (i=1; i<=pagination.last; i++) {
-                var el = document.createElement('a');
-                el.href = "#";
-                el.innerHTML = i;
-
-                if (i===pagination.current) {
-                    el.className = 'on';
-                } else {
-                    el.onclick = (function(i) {
-                        return function() {
-                            pagination.gotoPage(i);
-                        }
-                    })(i);
-                }
-
-                fragment.appendChild(el);
-            }
-            paginationEl.appendChild(fragment);
+            fragment.appendChild(el);
         }
-        // input focus in
-        handleFocusIn(e) {
-            e.preventDefault();
-            const recommendBox = document.querySelector("#recommend");
-            recommendBox.classList.remove('invisible');
-        }
-        // input focus out 
-        handleFocusOut(e) {
-            e.preventDefault();
-            const recommendBox = document.querySelector("#recommend");
-            recommendBox.classList.add('invisible');
-        }
+        paginationEl.appendChild(fragment);
+    }
+    // input focus in
+    handleFocusIn(e) {
+        e.preventDefault();
+        const recommendBox = document.querySelector("#recommend");
+        recommendBox.classList.remove('invisible');
+    }
+    // input focus out 
+    handleFocusOut(e) {
+        e.preventDefault();
+        const recommendBox = document.querySelector("#recommend");
+        recommendBox.classList.add('invisible');
+    }
 
-        render() {
-            const inputs = this.props.attributes.map(attribute =>
-                <input onFocus={this.handleFocusIn} 
-                       onBlur={this.handleFocusOut}
-                       key={attribute}
-                       style={{display:attribute === 'createdDtm' ? "none" : null}}
-                       type="text" 
-                       placeholder={attribute} 
-                       ref={attribute} 
-                       className="input_text"/>
-            );
-            return (
-                <div className="searchFrame">
-                    <div className="searchCenter">
-                        <span className="green_window">
-                            {inputs}
-                        </span>
-                        <button className="sch_smit" onClick={this.handleSearch}>검색</button>
-                        <SearchHistories page={this.props.page}
-                                searchHistories={this.props.searchHistories}
-                                links={this.props.links}
-                                pageSize={this.props.pageSize}
-                                attributes={this.props.attributes}
-                                loggedInUser={this.props.loggedInUser}/>
-                    </div>
-                    
-                    <div id="pagination"></div>
-                    <PlaceGrid 
-                        data={this.state.placeList}
-                        placeObj={this.state.placeObject}/>
+    render() {
+        const inputs = this.props.attributes.map(attribute =>
+            <input onFocus={this.handleFocusIn} 
+                    onBlur={this.handleFocusOut}
+                    key={attribute}
+                    style={{display:attribute === 'createdDtm' ? "none" : null}}
+                    type="text" 
+                    placeholder={attribute} 
+                    ref={attribute} 
+                    className="input_text"/>
+        );
+        return (
+            <div className="searchFrame">
+                <div className="searchCenter">
+                    <span className="green_window">
+                        {inputs}
+                    </span>
+                    <button className="sch_smit" onClick={this.handleSearch}>검색</button>
+                    <SearchHistories page={this.props.page}
+                            searchHistories={this.props.searchHistories}
+                            links={this.props.links}
+                            pageSize={this.props.pageSize}
+                            attributes={this.props.attributes}
+                            loggedInUser={this.props.loggedInUser}/>
                 </div>
+                
+                <div id="pagination" className="pagination"></div>
+                <PlaceGrid 
+                    data={this.state.placeList}
+                    placeObj={this.state.placeObject}/>
+            </div>
 		)
 	}
 }
