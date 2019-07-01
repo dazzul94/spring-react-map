@@ -111,45 +111,45 @@ class PlaceList extends React.Component {
 					onAfterOpen={this.afterOpenModal}
 					onRequestClose={this.closeModal}
 					style={customStyles}
-					contentLabel="Example Modal"
+					contentLabel="place detail"
 				>
 					<h2 ref={subtitle => this.subtitle = subtitle}>{clickedPlace.place_name}</h2>
+					<a href={`https://map.kakao.com/link/map/${clickedPlace.id}`} target="_blank">카카오 지도 바로가기</a>
 					<button onClick={this.closeModal}>close</button>
 					<table>
 						<tbody>
 							<tr>
-								<td style={{background:"#eee"}}>address_name</td>
+								<td style={{background:"#eee"}}>전체 지번 주소</td>
 								<td>{clickedPlace.address_name}</td>
-								<td style={{background:"#eee"}}>category_group_code</td>
+								<td style={{background:"#eee"}}>카테고리 그룹 코드</td>
 								<td>{clickedPlace.category_group_code}</td>
 							</tr>
 							<tr>
-								<td style={{background:"#eee"}}>category_group_name</td>
+								<td style={{background:"#eee"}}>카테고리 그룹명</td>
 								<td>{clickedPlace.category_group_name}</td>
-								<td style={{background:"#eee"}}>category_name</td>
+								<td style={{background:"#eee"}}>카테고리 이름</td>
 								<td>{clickedPlace.category_name}</td>
 							</tr>
 							<tr>
-								<td style={{background:"#eee"}}>distance</td>
+								<td style={{background:"#eee"}}>중심좌표까지의 거리</td>
 								<td>{clickedPlace.distance}</td>
-								<td style={{background:"#eee"}}>phone</td>
+								<td style={{background:"#eee"}}>전화번호</td>
 								<td>{clickedPlace.phone}</td>
 							</tr>
 							<tr>
-								<td style={{background:"#eee"}}>place_url</td>
+								<td style={{background:"#eee"}}>장소 상세페이지 URL</td>
 								<td>{clickedPlace.place_url}</td>
-								<td style={{background:"#eee"}}>road_address_name</td>
+								<td style={{background:"#eee"}}>전체 도로명 주소</td>
 								<td>{clickedPlace.road_address_name}</td>
 							</tr>
 							<tr>
-								<td style={{background:"#eee"}}>x</td>
+								<td style={{background:"#eee"}}>x 좌표값</td>
 								<td>{clickedPlace.x}</td>
-								<td style={{background:"#eee"}}>y</td>
+								<td style={{background:"#eee"}}>y 좌표값</td>
 								<td>{clickedPlace.y}</td>
 							</tr>
 						</tbody>
 					</table>
-					<a href={`https://map.kakao.com/link/map/${clickedPlace.id}`} target="_blank">카카오 지도 바로가기</a>
 					<div id="map" style={{width:"100%",height:'350px'}}></div>
 				</Modal>
 				<div style={{width:'750px'}}>
