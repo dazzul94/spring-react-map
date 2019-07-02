@@ -11,10 +11,12 @@
     <div class="frame">
         <div class="header">
             <div class="logo">장소 검색 서비스</div>
-            Hello, <span id="userName" th:text="${#authentication.name}">user</span>.
-            <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Log Out"/>
-            </form>
+            <div class="login">
+	            Hello, <span id="userName" th:text="${#authentication.name}">user</span>.
+	            <form th:action="@{/logout}" method="post">
+	                <input class="loginBtn" type="submit" value="Log Out"/>
+	            </form>
+            </div>
         </div>
         <div class="container">
             <div id="react"></div>

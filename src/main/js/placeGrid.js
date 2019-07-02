@@ -115,7 +115,7 @@ class PlaceList extends React.Component {
 				>
 					<h2 ref={subtitle => this.subtitle = subtitle}>{clickedPlace.place_name}</h2>
 					<a href={`https://map.kakao.com/link/map/${clickedPlace.id}`} target="_blank">카카오 지도 바로가기</a>
-					<button onClick={this.closeModal}>close</button>
+					<button style={{float:'right'}} className="defaultBtn" onClick={this.closeModal}>close</button>
 					<table>
 						<tbody>
 							<tr>
@@ -170,7 +170,7 @@ class PlaceList extends React.Component {
 										<th>{data.address_name}</th>
 										<td>{data.place_name}</td>
 										<td>{data.phone}</td>
-										<td><button onClick={(e) => this.handleBtnClick(data)}>More</button></td>
+										<td><button className="defaultBtn" onClick={(e) => this.handleBtnClick(data)}>More</button></td>
 									</tr>
 								)
 							})
