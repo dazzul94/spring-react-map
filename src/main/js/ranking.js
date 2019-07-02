@@ -10,22 +10,22 @@ class Ranking extends React.Component {
     render() {
         const { searchHistories } = this.props;
 
-        var resultMap = {};
-        var arr = [];
+        let resultMap = {};
+        let arr = [];
         searchHistories.map( (searchHistory) => {
             arr.push(searchHistory.entity.keyWord);
         })
 
         // 중복제거
-        for (var i in arr) {
+        for (let i in arr) {
             if (!(arr[i] in resultMap))
                 resultMap[arr[i]] = [];
             resultMap[arr[i]].push(arr[i]);
         }
 
         // 객체배열
-        var keys = Object.keys(resultMap);
-        var keyMap = [];
+        let keys = Object.keys(resultMap);
+        let keyMap = [];
         keys.map( key => {
             keyMap.push( { key : key, count: resultMap[key].length } );
         })

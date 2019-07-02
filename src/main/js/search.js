@@ -22,11 +22,11 @@ class Search extends React.Component {
 
     // 날짜변경
     fillZeros(n, digits) {  
-        var zero = '';  
+        let zero = '';  
         n = n.toString();  
   
         if (n.length < digits) {  
-            for (var i = 0; i < digits - n.length; i++)  
+            for (let i = 0; i < digits - n.length; i++)  
                 zero += '0';  
         }  
         return zero + n;  
@@ -36,7 +36,7 @@ class Search extends React.Component {
     handleSearch(e) {
         e.preventDefault();
         
-        var keyword = ReactDOM.findDOMNode(this.refs['keyWord']).value.trim();
+        let keyword = ReactDOM.findDOMNode(this.refs['keyWord']).value.trim();
         if (!keyword.replace(/^\s+|\s+$/g, '')) {
             alert('키워드를 입력해주세요!');
             return false;
@@ -48,9 +48,9 @@ class Search extends React.Component {
         const newSearchHistory = {};
         this.props.attributes.forEach(attribute => {
             if(attribute === 'createdDtm') { 
-                var d = new Date();  
+                let d = new Date();  
             
-                var s = this.fillZeros(d.getFullYear(), 4) + '-' +  
+                let s = this.fillZeros(d.getFullYear(), 4) + '-' +  
                         this.fillZeros(d.getMonth() + 1, 2) + '-' +  
                         this.fillZeros(d.getDate(), 2) + ' ' +  
                             
@@ -80,13 +80,18 @@ class Search extends React.Component {
             // 오류 처리
             this.setState({
                 placeList: []
-            })
+            });
+            // 조회결과가 없으니 페이징 삭제
+            let paginationEl = document.getElementById('pagination');
+            while (paginationEl.hasChildNodes()) {
+                paginationEl.removeChild (paginationEl.lastChild);
+            }
         }
     }
     
     // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
     displayPagination(pagination) {
-        var paginationEl = document.getElementById('pagination'),
+        let paginationEl = document.getElementById('pagination'),
             fragment = document.createDocumentFragment(),
             i; 
 
@@ -94,9 +99,8 @@ class Search extends React.Component {
         while (paginationEl.hasChildNodes()) {
             paginationEl.removeChild (paginationEl.lastChild);
         }
-
         for (i=1; i<=pagination.last; i++) {
-            var el = document.createElement('a');
+            let el = document.createElement('a');
             el.innerHTML = i;
 
             if (i===pagination.current) {
