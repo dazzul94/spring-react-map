@@ -2,7 +2,7 @@
 
 #### 1. Springboot + React - 장소검색 서비스입니다.
 - JAVA 8
-- Spring Boot 사용
+- Spring Boot
 - Maven
 - H2
 
