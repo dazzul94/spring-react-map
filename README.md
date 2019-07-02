@@ -1,6 +1,10 @@
 # spring-react-map (2019-06-28 - 2019-07-03)
 
 1. springboot, React.js 장소검색 서비스입니다.
+- JAVA 8
+- Spring Boot 사용
+- Maven
+- H2
 
 2. 외부 라이브러리 사용
 - react: SPA(Single Page Application)으로 구현
