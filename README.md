@@ -1,6 +1,6 @@
 # spring-react-map (2019-06-28 - 2019-07-03)
 
-1. Springboot, React.js 장소검색 서비스입니다.
+1. Springboot + React 장소검색 서비스입니다.
 - JAVA 8
 - Spring Boot 사용
 - Maven
