@@ -1,1 +1,1 @@
-### Screenshot 파일입니다.
+#### Screenshot 파일입니다.
