@@ -12,3 +12,8 @@
 
 3. Executable jar 형태로 만들어 Github에 업로드
 - [Executable jar file Download](https://github.com/dazzul94/spring-react-map/raw/master/deploy/spring-react-map-0.0.1-SNAPSHOT.jar).
+- java -jar spring-react-map-0.0.1-SNAPSHOT.jar
+
+4. 테스트 계정
+- admin / 1111
+- admin2 / 2222
