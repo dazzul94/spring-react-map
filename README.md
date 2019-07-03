@@ -23,4 +23,4 @@
 #### 4. 테스트 계정
 - admin / 1111
 - admin2 / 2222
--> localhost:8080으로 접속
+- -> localhost:8080으로 접속
