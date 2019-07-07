@@ -237,6 +237,7 @@ typings/
 
 *.iml
 .idea
+bin
 target
 bower_components
 node_modules
