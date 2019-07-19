@@ -1,6 +1,6 @@
 # spring-react-map (2019-06-28 - 2019-07-03)
 
-#### 1. Springboot + React - 카카오 API를 활용한 장소검색 서비스입니다.
+#### 1. Springboot + React - 카카오맵 API를 활용한 장소검색 서비스입니다.
 - JAVA 8
 - Spring Boot
 - Maven
